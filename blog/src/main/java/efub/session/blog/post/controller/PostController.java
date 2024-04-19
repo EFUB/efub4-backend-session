@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostController {
+
     private final PostService postService;
 
     /* 게시글 작성 */
