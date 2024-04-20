@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -34,5 +36,11 @@ public class CommentService {
         commentRepository.save(comment);
 
         return comment;
+    }
+
+    /* 게시글의 댓글 목록 조회 */
+    public List<Comment> findPostCommentList(Long postId) {
+        Post post = postService.findPostById(postId);
+        return commentRepository.findAllByPost(post);
     }
 }
