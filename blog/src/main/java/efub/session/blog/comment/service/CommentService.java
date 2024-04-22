@@ -43,4 +43,9 @@ public class CommentService {
         Post post = postService.findPostById(postId);
         return commentRepository.findAllByPost(post);
     }
+
+    /* 작성자의 댓글 목록 조회 */
+    public List<Comment> findAccountCommentList(Account writer) {
+        return commentRepository.findAllByWriter(writer);
+    }
 }

@@ -1,11 +1,15 @@
 package efub.session.blog.account.domain;
 
+import efub.session.blog.comment.domain.Comment;
 import efub.session.blog.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static efub.session.blog.account.domain.AccountStatus.REGISTERED;
 
@@ -31,6 +35,12 @@ public class Account extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING) // enum 타입
     private AccountStatus status;
+
+    /* mappedBy : 연관관계의 주인 */
+    /* cascade : 엔티티 삭제 시 연관된 엔티티의 처리 방식. */
+    /* orphanRemoval : 고아 객체의 처리 방식 */
+    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> commentList = new ArrayList<>();
 
     @Builder // 객체 생성
     public Account(String email, String password, String nickname, String bio) {
