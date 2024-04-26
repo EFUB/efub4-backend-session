@@ -39,8 +39,7 @@ public class Account extends BaseTimeEntity {
     /* mappedBy : 연관관계의 주인 */
     /* cascade : 엔티티 삭제 시 연관된 엔티티의 처리 방식. */
     /* orphanRemoval : 고아 객체의 처리 방식 */
-    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> commentList = new ArrayList<>();
+
 
     @Builder // 객체 생성
     public Account(String email, String password, String nickname, String bio) {

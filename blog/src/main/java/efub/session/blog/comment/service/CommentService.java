@@ -23,29 +23,9 @@ public class CommentService {
     private final PostService postService;
     private final CommentRepository commentRepository;
 
-    /* 댓글 생성 */
-    public Comment saveComment(Long postId, CommentRequestDto requestDto) {
-        Account writer = accountService.findAccountById(requestDto.getAccountId());
-        Post post = postService.findPostById(postId);
 
-        Comment comment = Comment.builder()
-                .content(requestDto.getContent())
-                .writer(writer)
-                .post(post)
-                .build();
-        commentRepository.save(comment);
-
-        return comment;
-    }
-
-    /* 게시글의 댓글 목록 조회 */
-    public List<Comment> findPostCommentList(Long postId) {
-        Post post = postService.findPostById(postId);
-        return commentRepository.findAllByPost(post);
-    }
-
-    /* 작성자의 댓글 목록 조회 */
-    public List<Comment> findAccountCommentList(Account writer) {
-        return commentRepository.findAllByWriter(writer);
-    }
 }
+
+
+
+

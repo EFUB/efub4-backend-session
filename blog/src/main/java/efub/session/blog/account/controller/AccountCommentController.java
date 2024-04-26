@@ -24,14 +24,7 @@ public class AccountCommentController {
     private final CommentService commentService;
 
     /* 작성자별 댓글 목록 조회 */
-    @GetMapping
-    public ResponseEntity<AccountCommentResponseDto> getAccountCommentList(@PathVariable("accountId") Long accountId){
-        Account writer = accountService.findAccountById(accountId);
-        List<Comment> commentList = commentService.findAccountCommentList(writer);
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(AccountCommentResponseDto.of(writer, commentList));
-    }
 }
 
 
