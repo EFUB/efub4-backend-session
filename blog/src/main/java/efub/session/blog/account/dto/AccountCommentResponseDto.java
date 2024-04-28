@@ -16,15 +16,8 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class AccountCommentResponseDto {
-    private String writerNickname;
-    private List<CommentResponseDto> accountCommentList;
-    private Long count;
 
-    public static AccountCommentResponseDto of(Account account, List<Comment> commentList){
-        return AccountCommentResponseDto.builder()
-                .writerNickname(account.getNickname())
-                .accountCommentList(commentList.stream().map(CommentResponseDto::of).collect(Collectors.toList()))
-                .count((long) commentList.size())
-                .build();
-    }
 }
+
+
+
