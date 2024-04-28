@@ -14,15 +14,8 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostCommentResponseDto {
-    private Long postId;
-    private List<CommentResponseDto> postCommentList;
-    private Long count;
 
-    public static PostCommentResponseDto of(Long postId, List<Comment> commentList){
-        return PostCommentResponseDto.builder()
-                .postId(postId)
-                .postCommentList(commentList.stream().map(CommentResponseDto::of).collect(Collectors.toList()))
-                .count((long) commentList.size())
-                .build();
-    }
 }
+
+
+
