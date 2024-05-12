@@ -1,10 +1,12 @@
 package efub.session.blog.post.controller;
 
 
+import efub.session.blog.comment.dto.HeartRequestDto;
 import efub.session.blog.post.domain.Post;
 import efub.session.blog.post.dto.AllPostResponseDto;
 import efub.session.blog.post.dto.PostRequestDto;
 import efub.session.blog.post.dto.PostResponseDto;
+import efub.session.blog.post.service.PostHeartService;
 import efub.session.blog.post.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final PostHeartService postHeartService;
 
     /* 게시글 작성 */
     @PostMapping
@@ -68,4 +71,21 @@ public class PostController {
 
         return "성공적으로 삭제되었습니다.";
     }
+
+    /* 좋아요 등록 */
+    @PostMapping("/{postId}/hearts")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public String createPostHeart(@PathVariable final Long postId, @RequestBody final HeartRequestDto requestDto) {
+        postHeartService.create(postId, requestDto.getAccountId());
+        return "좋아요를 눌렀습니다.";
+    }
+
+    /* 좋아요 삭제 */
+    @DeleteMapping("/{postId}/hearts")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String deletePostHeart(@PathVariable final Long postId, @RequestParam final Long accountId) {
+        postHeartService.delete(postId, accountId);
+        return "좋아요가 취소되었습니다.";
+    }
+
 }

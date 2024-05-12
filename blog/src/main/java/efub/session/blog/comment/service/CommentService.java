@@ -48,4 +48,24 @@ public class CommentService {
     public List<Comment> findAccountCommentList(Account writer) {
         return commentRepository.findAllByWriter(writer);
     }
+
+
+    /* 댓글 수정 */
+    public void updateComment(CommentRequestDto requestDto, Long commentId){
+        Comment comment = findCommentById(commentId);
+        comment.updateComment(requestDto.getContent());
+    }
+
+    /* 댓글 삭제 */
+    public void deleteComment(Long commentId) {
+        Comment comment = findCommentById(commentId);
+        commentRepository.delete(comment);
+    }
+
+    /* 댓글 아이디 조회 */
+    @Transactional(readOnly = true)
+    public Comment findCommentById(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. id=" + commentId));
+    }
 }
