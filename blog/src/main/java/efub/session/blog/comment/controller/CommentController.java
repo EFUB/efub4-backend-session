@@ -31,7 +31,7 @@ public class CommentController {
     private final CommentHeartService commentHeartService;
 
     // 댓글 수정
-    @PutMapping
+    @PutMapping("/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public CommentResponseDto updatePostComment(@PathVariable final Long commentId, @RequestBody @Valid final CommentRequestDto requestDto) {
         commentService.updateComment(requestDto, commentId);
@@ -40,7 +40,7 @@ public class CommentController {
     }
 
     // 댓글 삭제
-    @DeleteMapping
+    @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteComment(@PathVariable final Long commentId) {
         commentService.deleteComment(commentId);
@@ -49,7 +49,7 @@ public class CommentController {
 
 
     // 좋아요 등록
-    @PostMapping("/hearts")
+    @PostMapping("/{commentId}/hearts")
     @ResponseStatus(value = HttpStatus.CREATED)
     public String createCommentLike(@PathVariable final Long commentId, @RequestBody final AccountInfoRequestDto requestDto) {
         commentHeartService.create(commentId, requestDto);
@@ -57,12 +57,10 @@ public class CommentController {
     }
 
     // 좋아요 삭제
-    @DeleteMapping("/hearts")
+    @DeleteMapping("/{commentId}/hearts")
     @ResponseStatus(value = HttpStatus.OK)
     public String deleteCommentLike(@PathVariable final Long commentId, @RequestParam final Long accountId) {
         commentHeartService.delete(commentId, accountId);
         return "좋아요가 취소되었습니다.";
     }
-
-
 }

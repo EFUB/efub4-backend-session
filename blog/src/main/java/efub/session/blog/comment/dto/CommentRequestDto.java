@@ -5,9 +5,11 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+//@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentRequestDto {
     private Long accountId;
     private String content;
