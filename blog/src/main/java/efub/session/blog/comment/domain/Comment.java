@@ -4,6 +4,8 @@ import efub.session.blog.account.domain.Account;
 import efub.session.blog.global.entity.BaseTimeEntity;
 import efub.session.blog.post.domain.Post;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,7 +31,9 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)  /* 지연 로딩을 명시함. */
     @JoinColumn(name = "post_id", updatable = false) /* FK 칼럼 지정 */
     private Post post;
-    
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<CommentHeart> commentLikeList = new ArrayList<>();
 
     /* 빌더 패턴 이용 */
     @Builder
@@ -37,6 +41,10 @@ public class Comment extends BaseTimeEntity {
         this.content = content;
         this.writer = writer;
         this.post = post;
+    }
+
+    public void updateComment(String content) {
+        this.content = content;
     }
 
 }
