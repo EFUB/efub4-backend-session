@@ -21,19 +21,16 @@ public class PostHeartService {
     private final AccountService accountService;
 
     // 좋아요 등록
-    public void create(Long postId, Long accountId) {
-
-    }
+//    public void create(Long postId, Long accountId) {
+//    }
 
     // 좋아요 삭제
-    public void delete(Long postId, Long accountId) {
-
-    }
+//    public void delete(Long postId, Long accountId) {
+//    }
 
     // 좋아요 상태 확인
-    public boolean isHeart(Long accountId, Post post){
-
-    }
+//    public boolean isHeart(Long accountId, Post post){
+//    }
 
     @Transactional(readOnly = true)
     public boolean isExistsByWriterAndPost(Account account, Post post) {

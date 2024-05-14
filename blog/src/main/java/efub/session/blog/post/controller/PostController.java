@@ -73,13 +73,10 @@ public class PostController {
     }
 
     /* 좋아요 등록 */
-    public String createPostHeart(@PathVariable final Long postId, @RequestBody final HeartRequestDto requestDto) {
-
-    }
+//    public String createPostHeart(@PathVariable final Long postId, @RequestBody final HeartRequestDto requestDto) {
+//    }
 
     /* 좋아요 삭제 */
-    public String deletePostHeart(@PathVariable final Long postId, @RequestParam final Long accountId) {
-
-    }
-
+//    public String deletePostHeart(@PathVariable final Long postId, @RequestParam final Long accountId) {
+//    }
 }
