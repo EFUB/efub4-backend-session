@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-//@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentRequestDto {
     private Long accountId;
     private String content;
