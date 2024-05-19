@@ -50,4 +50,10 @@ public class AccountService {
         Account account = findAccountById(accountId);
         accountRepository.delete(account);
     }
+
+    @Transactional(readOnly = true)
+    public Account findAccountByEmail(String email){
+        return accountRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("해당 email 를 가진 계정을 찾을 수 없습니다. email = " + email));
+    }
 }
