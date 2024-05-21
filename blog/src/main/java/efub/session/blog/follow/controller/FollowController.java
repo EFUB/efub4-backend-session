@@ -20,41 +20,38 @@ public class FollowController {
     private final FollowService followService;
     private final AccountService accountService;
 
-    @PostMapping("/{accountId}")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public FollowStatusResponseDto addFollow(@PathVariable final Long accountId,
-                                             @RequestBody final FollowRequestDto requestDto) {
-        Long id = followService.add(accountId, requestDto);
-        Boolean isFollow = followService.isFollowing(accountId, requestDto.getFollowingId());
-        Account findAccount = accountService.findAccountById(requestDto.getFollowingId());
-        return new FollowStatusResponseDto(findAccount, isFollow);
-    }
+//    @PostMapping("/{accountId}")
+//    @ResponseStatus(value = HttpStatus.CREATED)
+//    public FollowStatusResponseDto addFollow([?], [?]) {
+////        Long id = ;
+////        Boolean isFollow = ;
+////        Account findAccount = ;
+////        return new ...;
+//    }
 
-    @GetMapping("/{accountId}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public FollowListResponseDto getFollowList(@PathVariable final Long accountId){
-        List<Follow> followerList = followService.findAllByFollowingId(accountId);
-        List<Follow> followingList = followService.findAllByFollowerId(accountId);
-        return FollowListResponseDto.of(followerList, followingList);
-    }
+//    @GetMapping("/{accountId}")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public FollowListResponseDto getFollowList([?]){
+//        List<Follow> followerList = ;
+//        List<Follow> followingList = ;
+//        return ...;
+//    }
 
-    @GetMapping("/{accountId}/search")
-    @ResponseStatus(value = HttpStatus.OK)
-    public FollowStatusResponseDto searchAccount(@PathVariable final Long accountId,
-                                                 @RequestParam final String email){
-        Account searchAccount = accountService.findAccountByEmail(email);
-        Boolean isFollow = followService.isFollowing(accountId, searchAccount.getAccountId());
-        return new FollowStatusResponseDto(searchAccount, isFollow);
-    }
+//    @GetMapping("/{accountId}/search")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public FollowStatusResponseDto searchAccount([?], [?]){
+//        Account searchAccount = ...;
+//        Boolean isFollow = ...;
+//        return new ...;
+//    }
 
-    @DeleteMapping("/{accountId}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public FollowStatusResponseDto deleteFollow(@PathVariable final Long accountId,
-                                                @RequestParam final Long followingId){
-        followService.delete(accountId, followingId);
-        Account findAccount = accountService.findAccountById(followingId);
-        Boolean isFollow = followService.isFollowing(accountId, followingId);
-        return new FollowStatusResponseDto(findAccount, isFollow);
-    }
+//    @DeleteMapping("/{accountId}")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public FollowStatusResponseDto deleteFollow([?], [?]){
+//        // 삭제
+//        // 팔로우했던 계정 찾기
+//        // 팔로잉 여부 재확인
+//        return new ...;
+//    }
 
 }
