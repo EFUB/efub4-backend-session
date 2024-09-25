@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 /* 테스트용 엔티티 */
-@Getter @Builder
+@Getter @Builder @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
@@ -25,6 +25,8 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserType type;
+
+    private String role;
 
     @CreatedDate
     @Column(name = "created_at")
