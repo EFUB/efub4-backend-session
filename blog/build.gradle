@@ -32,8 +32,7 @@ dependencies {
 	/* test  */
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-
-						 // here : H2 추가
+	testRuntimeOnly 'com.h2database:h2' // H2 추가
 }
 
 jar {
