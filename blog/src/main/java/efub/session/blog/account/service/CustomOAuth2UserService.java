@@ -37,8 +37,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2UserInfo oAuth2UserInfo = new OAuth2UserInfo(oAuth2User.getAttributes());
 
         // DB에서 해당 사용자 조회 -> 없으면 새로 생성
-        Account account = accountRepository.findByEmail(oAuth2UserInfo.getEmail())
-                .orElseGet(() -> createAccount(oAuth2UserInfo));
+
 
         // 사용자 속성 생성
         Map<String, Object> attributes = new HashMap<>(oAuth2User.getAttributes());
