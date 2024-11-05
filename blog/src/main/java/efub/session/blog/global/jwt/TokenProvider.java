@@ -43,7 +43,18 @@ public class TokenProvider {
     public String createAccessToken(Account account){
         Date now = new Date();
         // 액세스토큰 발급
-
+        return Jwts.builder()
+                // 헤더 - 토큰 타입: JWT
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                // 내용 - 토큰이 발급된 시간: 현재 시간
+                .setIssuedAt(now)
+                // 내용 - 토큰 만료 시간: expiredMs 변수값
+                .setExpiration(new Date(now.getTime() + accessTokenExpiration))
+                // 내용 - 토큰 제목: 사용자 이메일
+                .setSubject(account.getEmail())
+                // 서명 - 시크릿키와 함께 해시값을 HS256 방식으로 암호화
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
     }
 
     /**
@@ -72,7 +83,7 @@ public class TokenProvider {
      */
     public void saveRefreshToken(Long userId, String refreshToken){
         // Redis에 리프레시 토큰 저장
-
+        redisTemplate.opsForValue().set(userId.toString(),refreshToken, Duration.ofMillis(refreshTokenExpiration));
     }
 
     /**

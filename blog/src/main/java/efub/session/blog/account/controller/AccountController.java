@@ -1,13 +1,14 @@
 package efub.session.blog.account.controller;
 
 import efub.session.blog.account.domain.Account;
-import efub.session.blog.account.dto.AccountResponseDto;
-import efub.session.blog.account.dto.AccountUpdateRequestDto;
-import efub.session.blog.account.dto.SignUpRequestDto;
+import efub.session.blog.account.dto.*;
 import efub.session.blog.account.service.AccountService;
+import efub.session.blog.account.service.AuthService;
+import efub.session.blog.global.utils.SecurityUtils;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
+    private final AuthService authService;
 
     /* 계정 생성 기능 */
     @PostMapping
@@ -71,5 +73,15 @@ public class AccountController {
     public String delete(@PathVariable long accountId) {
         accountService.delete(accountId);
         return "성공적으로 탈퇴가 완료되었습니다";
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<String> getEmail(){
+        return ResponseEntity.status(HttpStatus.OK).body(SecurityUtils.getCurrentUserEmail());
+    }
+
+    @PostMapping("/token")
+    public ResponseEntity<TokenResponseDto> reissuedAccessToken(@RequestBody TokenRequestDto requestDto){
+        return ResponseEntity.status(HttpStatus.OK).body(authService.reissueAccessToken(requestDto.getRefreshToken()));
     }
 }
